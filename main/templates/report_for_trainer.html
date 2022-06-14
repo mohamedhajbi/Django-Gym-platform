@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<div class="row">
+				<div class="col-3">
+					{% include 'user/left-sidebar.html' %}
+				</div>
+				<div class="col-9">
+					            <center>
+                        <div class="waviy">
+                        
+                          <span style="--i:1">R</span>
+                          <span style="--i:2">E</span>
+                          <span style="--i:3">P</span>
+                          <span style="--i:4">O</span>
+                          <span style="--i:5">R</span>
+                          <span style="--i:6">T</span>
+                          <span style="--i:7"></span>
+						              <span style="--i:7"></span>
+                          <span style="--i:8">T</span>
+                          <span style="--i:9">R</span>
+                          <span style="--i:10">A</span>
+                          <span style="--i:11">I</span>
+                          <span style="--i:12">N</span>
+                          <span style="--i:13">E</span>
+                          <span style="--i:14">R</span>
+                         </div>
+                      </center>
+					{% if msg %}
+					<p class="text-success">{{msg}}</p>
+					{% endif %}
+					<form class="shadow p-3 mb-5 bg-white rounded" method="post" action="" enctype="multiple/form-data">
+							{% csrf_token %}
+							{{form|crispy}}
+							<input type="submit" class="mt-2 btn btn-primary" />
+					</form>
+				</div>
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% endblock %}

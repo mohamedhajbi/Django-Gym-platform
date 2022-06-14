@@ -1,0 +1,22 @@
+{% extends  'base.html' %} 
+{% block content%}
+<main>
+    <!-- Services -->
+    <section class="containers">
+        <h1 class="text-center mb-4 section-heading border-bottom pb-2">{{service.title}}</h1>
+        <div class="row">
+            
+            <div class="row">
+                <div class="col-xl-8 col-lg-10 mx-auto">
+                    <div class=" containers  text-content">
+                      <center> {{service.detail|safe}} </center> 
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </section>
+    <!-- End -->
+</main>
+<!-- End -->
+{% endblock %}

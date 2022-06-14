@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<center>
+				<div class="waviy">
+				 
+				  <span style="--i:1">A</span>
+				  <span style="--i:2">L</span>
+				  <span style="--i:3">B</span>
+				  <span style="--i:4">u</span>
+				  <span style="--i:5">M</span>
+				  <span style="--i:6">S</span>
+				
+				 </div>
+			  <center>
+			<div class="row">
+				{% for news in newss %}
+				<div class="col-md-4 mb-4">
+					<div class="card">
+					  <img src="{{news.img.url}}" class="card-img-top" alt="{{news.title}}">
+					  <div class="card-body">
+					    <h5 class="card-title">{{news.title}}</h5>
+					    <p class="card-text">{{news.detail}}</p>
+					    <a href="{% url 'news_detail' news.id %}" class="btn btn-primary">View All</a>
+					  </div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% endblock %}

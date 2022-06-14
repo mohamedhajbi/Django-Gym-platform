@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+	.marked{
+		display: none;
+	}
+</style>
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<div class="row">
+				<div class="col-3">
+					{% include 'trainer/left-sidebar.html' with totalUnread=totalUnread %}
+				</div>
+				<div class="col-9">
+					<center>
+                        <div class="waviy">
+                        
+                          <span style="--i:1">N</span>
+                          <span style="--i:2">O</span>
+                          <span style="--i:3">T</span>
+                          <span style="--i:4">I</span>
+                          <span style="--i:5">F</span>
+                          <span style="--i:6">I</span>
+                          <span style="--i:7">C</span>
+						  <span style="--i:7">A</span>
+                          <span style="--i:7">T</span>
+                          <span style="--i:1">I</span>
+                          <span style="--i:1">O</span>
+                          <span style="--i:1">N</span>
+                          
+                         </div>
+                        </center>
+					<span class="ajaxRes"></span>
+					<ul class="list-group notif-list">
+						{% for notif in notifs %}
+						<li class="list-group-item">
+							{{notif.notify_detail}}
+							{% if not notif.notifStatus %}
+							<span data-index="{{notif.pk}}" data-notif="{{notif.pk}}" class="btn btn-info btn-sm float-end markreadbtn">MarkAsRead</span>
+							{% endif %}
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+<script>
+	const webSocket = new WebSocket(
+		'ws://'
+		+ window.location.host
+		+ '/ws/notifications/'
+	);
+	webSocket.onopen=function(event){
+		webSocket.send(JSON.stringify({
+			'message': 'from client'
+		}));
+	}
+	webSocket.onmessage=function(event){
+		var _data=JSON.parse(event.data);
+		$(".notif-list").append('<li class="list-group-item">'+_data.notif+'<span class="btn btn-info btn-sm float-end">Mark as read</span></li>');
+		$(".totalunread").text(_data.total);
+	}
+	webSocket.onclose=function(event){
+		console.log('Closed');
+	}
+
+// MarkRead Section Start
+$(document).on("click",".markreadbtn",function(){
+	var _index=$(this).attr('data-index');
+	var _notif=$(this).attr('data-notif');
+	var _vm=$(this);
+	$.ajax({
+		url:"{% url 'mark_read_trainer_notif' %}",
+		data:{
+			notif:_notif
+		},
+		dataType:'json',
+		beforeSend:function(){
+			
+		},
+		success:function(res){
+			if(res.bool==true){
+				$(".totalunread").text(res.totalUnread);
+				_vm.remove();
+			}
+		}
+	});
+			});
+			// End
+</script>
+{% endblock %}

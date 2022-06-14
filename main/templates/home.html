@@ -1,0 +1,115 @@
+{% extends  'base.html' %} 
+{% load static %} 
+{% block content%}
+<!-- Main Start -->
+<main>
+    <!-- banner Start -->
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for banner in banners%}
+          <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}">
+            <img src="{{banner.img.url}}" class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/>
+          </div>
+        {% endfor%}  
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- End Banner -->
+    <!-- Services -->
+    <section class="container my-4">
+
+      <center>
+        <div class="waviy">
+         
+          <span style="--i:1">S</span>
+          <span style="--i:2">E</span>
+          <span style="--i:3">R</span>
+          <span style="--i:4">V</span>
+          <span style="--i:5">I</span>
+          <span style="--i:6">C</span>
+          <span style="--i:7">E</span>
+          <span style="--i:8">S</span>
+  
+         </div>
+      <center>
+        <div class="row">
+          {% for service in services %}
+            <div class="col-md-4">
+              <div class="card shadow-lg ">
+                <img src="{{service.img.url}}" class="card-img-top  width="300" height="300" " alt="...">
+                <div class="card-body">
+                  <h3 class="card-title">{{service.title}}</h3>
+                    
+                    <a class="btn btn-primary" href="{% url 'service_detail' service.id %}" >Read More</a>
+                </div>
+              </div>
+            </div>
+          {% endfor%}  
+        </div>
+    </section>
+    <!-- End -->
+
+    <!-- Testimonials -->
+    <section class="container-fluid bg-white py-4 mt-5 border-top border-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+
+                  <center>
+                    <div class="waviy">
+                     
+                      <span style="--i:1">A</span>
+                      <span style="--i:2">B</span>
+                      <span style="--i:3">O</span>
+                      <span style="--i:4">U</span>
+                      <span style="--i:5">T</span>
+                      <span style="--i:6"></span>
+                      <span style="--i:7">U</span>
+                      <span style="--i:8">S</span>
+              
+                     </div>
+                  <center>
+                        <p class="lh-base">At  Overdoze Gym you’ll find all the latest strength and cardio equipment along with a energetic group exercise program that includes gym for woman ,Kickboxing, Club kids, Muscle Building , self defence , MMA , many other cardio classes. You’ll find a supportive environment with all kinds of people who are working just as hard as you to meet their goals. Our Staff, Trainers & Group exercise instructors are committed to offering our members a great fitness experience. Whether you’re a mom looking to get back into shape, a marathon runner trying to shave a few minutes off your personal best or just trying to stay healthy we would love to help you realize your potential and meet your goals!!</p>
+                </div>
+                <div class="col-md-6 offset-1">
+                  <center>
+                    <div class="waviy">
+                     
+                      <span style="--i:1">G</span>
+                      <span style="--i:2">A</span>
+                      <span style="--i:3">L</span>
+                      <span style="--i:4">L</span>
+                      <span style="--i:5">E</span>
+                      <span style="--i:6">R</span>
+                      <span style="--i:7">Y</span>
+                      
+                     </div>
+                  <center>
+                        <div class="gallery">
+                          {% for gimg in gimgs %}
+                          <a href="{{ gimg.img.url }}" data-lightbox="news"><img src="{{ gimg.img.url }}" width="155" class="img-thumbnail" alt="{{ gimg.alt_text }}"></a> 
+                            {% endfor %}
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Testimonials -->
+
+</main>
+<!-- End -->
+
+<!-- lightbox css -->
+<link rel="stylesheet" type="text/css" href=" {% static 'lightbox2-2.11.3/dist/css/lightbox.min.css' %}" />
+
+<!-- lightbox js -->
+<script type="text/javascript" src="{% static 'lightbox2-2.11.3/dist/js/lightbox.min.js' %}"></script>
+
+{% endblock %}

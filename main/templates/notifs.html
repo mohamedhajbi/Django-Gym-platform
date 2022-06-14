@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+	.marked{
+		display: none;
+	}
+</style>
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<div class="row">
+				<div class="col-3">
+					{% include 'user/left-sidebar.html' %}
+				</div>
+				<div class="col-9">
+					<center>
+                        <div class="waviy">
+                        
+                          <span style="--i:1">N</span>
+                          <span style="--i:2">O</span>
+                          <span style="--i:3">T</span>
+                          <span style="--i:4">I</span>
+                          <span style="--i:5">F</span>
+                          <span style="--i:6">I</span>
+                          <span style="--i:7">C</span>
+						  <span style="--i:8">A</span>
+                          <span style="--i:9">T</span>
+                          <span style="--i:10">I</span>
+                          <span style="--i:11">O</span>
+                          <span style="--i:12">N</span>
+                          
+                         </div>
+                        </center>
+					<ul class="list-group notif-list">
+						
+					</ul>
+				</div>
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".ajaxRes").hide();
+		setInterval(function(){
+			$.ajax({
+				url:"{% url 'get_notifs' %}",
+				dataType:'json',
+				beforeSend:function(){
+					$(".ajaxRes").show();
+					$(".ajaxRes").text('Loading...');
+				},
+				success:function(res){
+					_html='';
+					$(".totalunread").text(res.totalUnread);
+					$.each(res.data,function(index,d){
+						if(d.notifStatus==true){
+							_html+='<li class="list-group-item list'+d.pk+'">'+d.notify_detail+'<button data-index="'+d.pk+'" data-notif="'+d.pk+'" class="btn btn-sm btn-secondary float-end markreadbtn markreadbtn'+d.pk+'"" style="display:none;">MarkRead</button><button class="float-end btn btn-success btn-sm marked'+d.pk+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></button></li>';
+						}else{
+							_html+='<li class="list-group-item bg-light list'+d.pk+'">'+d.notify_detail+'<button data-index="'+d.pk+'" data-notif="'+d.pk+'" class="btn btn-sm btn-secondary float-end markreadbtn markreadbtn'+d.pk+'"">MarkRead</button><button class="float-end btn btn-success btn-sm marked marked'+d.pk+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></button></li>';
+						}
+					});
+					$(".notif-list").html(_html);
+					$(".ajaxRes").hide();
+				}
+			});
+		},1000);
+
+		// MarkRead Section Start
+		$(document).on("click",".markreadbtn",function(){
+			var _index=$(this).attr('data-index');
+			var _notif=$(this).attr('data-notif');
+
+			$.ajax({
+				url:"{% url 'mark_read_notif' %}",
+				data:{
+					notif:_notif
+				},
+				dataType:'json',
+				beforeSend:function(){
+					
+				},
+				success:function(res){
+					if(res.bool==true){
+						$(".list"+_index).removeClass('bg-light');
+						$(".markreadbtn"+_index).hide();
+						$(".marked"+_index).show();
+					}
+				}
+			});
+		});
+		// End
+
+	});
+</script>
+
+{% endblock %}

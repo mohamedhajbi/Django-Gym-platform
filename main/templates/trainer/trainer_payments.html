@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<div class="row">
+				<div class="col-3">
+					{% include 'trainer/left-sidebar.html' %}
+				</div>
+				<div class="col-9">
+					<center>
+                        <div class="waviy">
+							
+                          <span style="--i:1">P</span>
+                          <span style="--i:2">A</span>
+                          <span style="--i:3">Y</span>
+                          <span style="--i:4">M</span>
+                          <span style="--i:5">E</span>
+                          <span style="--i:6">N</span>
+                          <span style="--i:7">T</span>
+						  <span style="--i:7">S</span>
+                          
+                         </div>
+                        </center>
+					<table class="table table-bordered   shadow p-3 mb-5 bg-white rounded">
+						<tr>
+							<th class="text-center">Amount</th>
+							<th class="text-center">Amount Date</th>
+						</tr>
+						{% for tp in trainer_pays %}
+						<tr>
+							<td class="text-center">{{tp.amt}} DT</td>
+							<td class="text-center">{{tp.amt_date}}</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% endblock %}

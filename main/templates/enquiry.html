@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<center>
+				<div class="waviy">
+				
+				  <span style="--i:1">E</span>
+				  <span style="--i:2">N</span>
+				  <span style="--i:3">Q</span>
+				  <span style="--i:4">U</span>
+				  <span style="--i:5">I</span>
+				  <span style="--i:6">R</span>
+				  <span style="--i:7">Y</span>
+				  <span style="--i:7"></span>
+				  <span style="--i:8">F</span>
+				  <span style="--i:9">O</span>
+				  <span style="--i:10">R</span>
+				  <span style="--i:11">M</span>
+		  
+				 </div>
+			  <center>
+			<div class="row">
+				<div class="col-md-6">
+					<img src="{% static 'imgs/enquiry.png' %}" class="img-fluid" /> 
+				</div>
+				<div class="col-md-6">
+                    {% if msg %}
+                    <p class="text-success">{{msg}}</p>
+                    {% endif %}
+						<form class="shadow p-3 mb-5 bg-white rounded" method="POST" action="{% url 'enquiry' %}">
+							{% csrf_token %}
+							{{form|crispy}}
+							<input type="submit" class="mt-4 w-100 btn btn-primary" />
+						</form>
+				
+				</div>
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% endblock %}

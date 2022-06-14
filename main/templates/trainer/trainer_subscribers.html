@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+            <div class="row">
+                <div class="col-3">
+                    {% include 'trainer/left-sidebar.html' %}
+                </div>
+                <div class="col-9">
+                    <center>
+                        <div class="waviy">
+							
+                          <span style="--i:1">S</span>
+                          <span style="--i:2">U</span>
+                          <span style="--i:3">B</span>
+                          <span style="--i:4">S</span>
+                          <span style="--i:5"></span>
+                          <span style="--i:6">L</span>
+                          <span style="--i:7">I</span>
+						  <span style="--i:7">S</span>
+                          <span style="--i:7">T</span>
+
+                          
+                         </div>
+                        </center>
+                <div class="list-group ">
+                    {% for ts in trainer_subs %}
+                    <a href="#" class="list-group-item shadow-sm p-3 mb-1 bg-white rounded">{{ts.user}}</a>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% endblock %}

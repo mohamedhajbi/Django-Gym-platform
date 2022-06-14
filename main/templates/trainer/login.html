@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<h1 class="text-center mb-4 section-heading border-bottom pb-2">Trainer Login</h1>
+			<div class="row">
+				<div class="col-md-6 offset-3">
+					{% if msg %}
+					<p class="text-warning">{{msg}}</p>
+					{% endif %}
+					<form class="shadow p-3 mb-5 bg-white rounded" method="POST">
+						{% csrf_token %}
+						
+						{{form.username|as_crispy_field}}
+						
+						{{form.pwd|as_crispy_field}}
+
+						<input class="mt-2 btn btn-success" type="submit" value="Login">
+					</form>
+					</form>
+				</div>
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+
+
+{% endblock %}
